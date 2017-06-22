@@ -84,8 +84,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             if ballCount <= 0
             {
                 print("you lose")
-           //     let myAlert = UIAlertController(title: "Good Try", message: "Sorry, you lost! Try again!", preferredStyle: UIAlertControllerStyle.alert)
-          //      let resetButton = UIAlertAction(title: "Play Again", style: UIAlertActionStyle.default, handler: {sender in))
+                let myAlert = UIAlertController(title: "You have lost a ball", message: "Please try again", preferredStyle: UIAlertControllerStyle.alert)
+                let dismissButton = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+                myAlert.addAction(dismissButton)
                         print("lord jesus, i dont wanna die")
                 
             }

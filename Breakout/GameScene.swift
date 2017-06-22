@@ -19,6 +19,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     var ballCount = 3
     var scoreLabel : SKLabelNode!
     var titleScore : SKLabelNode!
+    var ball1 : SKTexture!
+    var ball2 : SKTexture!
+    var ball3 : SKTexture!
     var score = 0
     
     
@@ -26,13 +29,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     {
         physicsWorld.contactDelegate = self
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)  //Makes edge of view part of physics
+        createScoreLabel()
         createBackground()
+        showLives()
         makeBall()
         generatePaddle()
         concieveBrick()
         concieveBrickTwo()
         concieveBrickThree()
         print(numOfBrick)
+        
+        
+        
         
     }
     
@@ -73,18 +81,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 numOfBrick -= 1
                 if i?.color == UIColor.red
                 {
+                    print("red")
                     score += 10
-                    scoreLabel = SKLabelNode(text: "\(score)")
+                    scoreLabel.text = "\(score)"
                 }
                 else if i?.color == UIColor.green
-                {
+                {                    print("green")
+
                     score += 20
-                    scoreLabel = SKLabelNode(text: "\(score)")
+                    scoreLabel.text = "\(score)"
                 }
                 else if i?.color == UIColor.blue
                 {
+                    print("blue")
+
                     score += 50
-                    scoreLabel = SKLabelNode(text: "\(score)")
+                    scoreLabel.text = "\(score)"
                 }
             }
             print(numOfBrick)
@@ -102,6 +114,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             print("Ball lost!")
             ball.physicsBody?.isDynamic = false
             ball.physicsBody?.applyImpulse(CGVector(dx: 5, dy: 5))
+            ball1.z
             ballCount -= 1
             if ballCount <= 0
             {
@@ -242,7 +255,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     
     func createScoreLabel ()
     {
-    scoreLabel = SKLabelNode(text: "\(score)")
+    scoreLabel = SKLabelNode(text: "hellow world")
+    scoreLabel.position = CGPoint(x: frame.midX, y: frame.minY)
+    addChild(scoreLabel)
+    }
+    
+    func showLives ()
+    {
+        ball1 = SKTexture(imageNamed: "blackBall")
+        ball2 = SKTexture(imageNamed: "blackBall")
+        ball3 = SKTexture(imageNamed: "blackBall")
+        var life1 = SKSpriteNode(texture: ball1, color: UIColor.white, size: CGSize(width: 25, height: 25))
+        var life2 = SKSpriteNode(texture: ball2, color: UIColor.white, size: CGSize(width: 25, height: 25))
+        var life3 = SKSpriteNode(texture: ball3, color: UIColor.white, size: CGSize(width: 25, height: 25))
+        life1.name = "life1"
+        life2.name = "life2"
+        life3.name = "life3"
+        life1.position = CGPoint(x: frame.maxX + 70, y: frame.minY + 10)
+        life1.position = CGPoint(x: frame.maxX + 80, y: frame.minY + 10)
+        life1.position = CGPoint(x: frame.maxX + 60, y: frame.minY + 10)
+        
+        addChild(life1)
+        addChild(life2)
+        addChild(life3)
+    
         
     }
     

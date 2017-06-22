@@ -17,6 +17,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     var bricksArray:[SKSpriteNode?] = []
     var numOfBrick = 0
     var ballCount = 3
+    var scoreLabel : SKLabelNode!
+    var titleScore : SKLabelNode!
+    var score = 0
+    
     
     override func didMove(to view: SKView)
     {
@@ -67,13 +71,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 print("Brick Hit")
                 i!.removeFromParent()
                 numOfBrick -= 1
+                if i?.color == UIColor.red
+                {
+                    score += 10
+                    scoreLabel = SKLabelNode(text: "\(score)")
+                }
+                else if i?.color == UIColor.green
+                {
+                    score += 20
+                    scoreLabel = SKLabelNode(text: "\(score)")
+                }
+                else if i?.color == UIColor.blue
+                {
+                    score += 50
+                    scoreLabel = SKLabelNode(text: "\(score)")
+                }
             }
             print(numOfBrick)
             if numOfBrick == 0
             {
           
             }
+            
         }
+    
+        
         
         if contact.bodyA.node == loseZone || contact.bodyB.node == loseZone
         {
@@ -216,6 +238,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             numOfBrick += 1
             print("whymbnmb")
         }
+    }
+    
+    func createScoreLabel ()
+    {
+    scoreLabel = SKLabelNode(text: "\(score)")
+        
     }
     
     func constructLoseZone()

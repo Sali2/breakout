@@ -9,7 +9,7 @@
 import Foundation
 
 protocol Alertable { }
-extension Alertable where Self: SKScene
+/*extension Alertable where Self: SKScene
 {
     
     func showAlert(withTitle title: String, message: String)
@@ -47,5 +47,5 @@ extension Alertable where Self: SKScene
         alertController.addAction(settingsAction)
         
         view?.window?.rootViewController?.present(alertController, animated: true)
-    }
-}
+    } */
+

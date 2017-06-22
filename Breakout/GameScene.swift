@@ -59,25 +59,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     
     func didBegin(_ contact: SKPhysicsContact)
     {
-        numOfBrick = 15
+        
         print("contact func")
         for i in bricksArray
         {
-            print("contact loop")
             if (contact.bodyA.node! == ball) && (contact.bodyB.node! ==  i) || (contact.bodyA.node! == i) && (contact.bodyB.node! == ball)
             {
                 print("Brick Hit")
                 i!.removeFromParent()
                 numOfBrick -= 1
-                print(numOfBrick)
-                
             }
+            print(numOfBrick)
             if numOfBrick == 0
             {
+                ball.physicsBody?.isDynamic = false
+                ball.position = CGPoint(x: frame.midX, y: frame.midY)
                 let addAlert = UIAlertController(title: "You Won!!!", message: "Congrats, you finished the level!!!", preferredStyle: .alert)
                 let addButtonTapped = UIAlertAction(title: "Next Level", style: .default)
                 addAlert.addAction(addButtonTapped)
                 addAlert.addAction(UIAlertAction(title: "Play Again", style: .cancel, handler: nil))
+                
             }
         }
         

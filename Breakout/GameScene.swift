@@ -114,7 +114,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             print("Ball lost!")
             ball.physicsBody?.isDynamic = false
             ball.physicsBody?.applyImpulse(CGVector(dx: 5, dy: 5))
-            ball1.z
             ballCount -= 1
             if ballCount <= 0
             {
@@ -122,7 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 let myAlert = UIAlertController(title: "You have lost a ball", message: "Please try again", preferredStyle: UIAlertControllerStyle.alert)
                 let dismissButton = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
                 myAlert.addAction(dismissButton)
-                        print("lord jesus, i dont wanna die")
+                        
                 
             }
         }
@@ -262,18 +261,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     
     func showLives ()
     {
-        ball1 = SKTexture(imageNamed: "blackBall")
-        ball2 = SKTexture(imageNamed: "blackBall")
-        ball3 = SKTexture(imageNamed: "blackBall")
+        ball1 = SKTexture(image: #imageLiteral(resourceName: "blackBall"))
+        ball2 = SKTexture(image: #imageLiteral(resourceName: "blackBall"))
+        ball3 = SKTexture(image: #imageLiteral(resourceName: "blackBall"))
         var life1 = SKSpriteNode(texture: ball1, color: UIColor.white, size: CGSize(width: 25, height: 25))
         var life2 = SKSpriteNode(texture: ball2, color: UIColor.white, size: CGSize(width: 25, height: 25))
         var life3 = SKSpriteNode(texture: ball3, color: UIColor.white, size: CGSize(width: 25, height: 25))
         life1.name = "life1"
         life2.name = "life2"
         life3.name = "life3"
-        life1.position = CGPoint(x: frame.maxX + 70, y: frame.minY + 10)
-        life1.position = CGPoint(x: frame.maxX + 80, y: frame.minY + 10)
-        life1.position = CGPoint(x: frame.maxX + 60, y: frame.minY + 10)
+        life1.position = CGPoint(x: frame.maxX + 70, y: frame.minY - 10)
+        life1.position = CGPoint(x: frame.maxX + 80, y: frame.minY - 10)
+        life1.position = CGPoint(x: frame.maxX + 60, y: frame.minY - 10)
         
         addChild(life1)
         addChild(life2)

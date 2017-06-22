@@ -1,5 +1,5 @@
 //
-//  HardGameScene.swift
+//  EasyGameScene.swift
 //  Breakout
 //
 //  Created by Devanshi Chakrabarti on 6/22/17.
@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class HardGameScene: SKScene, SKPhysicsContactDelegate
+class EasyGameScene: SKScene, SKPhysicsContactDelegate
 {
     var ball : SKSpriteNode!
     var paddle : SKSpriteNode!
@@ -57,9 +57,10 @@ class HardGameScene: SKScene, SKPhysicsContactDelegate
     
     
     
+    
     func createBackground()
     {
-        let stars = SKTexture(imageNamed: "Deep Blue Space iPhone 5 Wallpaper")
+        let stars = SKTexture(imageNamed: "stars3")
         for i in 0...1                          //Creates 2 stars for seamless transtition
         {
             let starsBackground = SKSpriteNode(texture: stars)

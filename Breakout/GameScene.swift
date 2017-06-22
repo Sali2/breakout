@@ -130,6 +130,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, Alertable
                     // Your code with delay
                     self.alertLabel.zPosition = -2
                 }
+                removeAllChildren()
                 DispatchQueue.main.asyncAfter(deadline: when)
                 {
                     self.restartGame()

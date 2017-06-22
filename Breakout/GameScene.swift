@@ -17,6 +17,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate, Alertable
     var bricksArray:[SKSpriteNode?] = []
     var numOfBrick = 0
     var ballCount = 3
+    var scoreLabel : SKLabelNode!
+    var titleScore : SKLabelNode!
+    var score = 0
+    
     
     override func didMove(to view: SKView)
     {
@@ -64,12 +68,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate, Alertable
                 print("Brick Hit")
                 i!.removeFromParent()
                 numOfBrick -= 1
+                if i?.color == UIColor.red
+                {
+                    score += 10
+                    scoreLabel = SKLabelNode(text: "\(score)")
+                }
+                else if i?.color == UIColor.green
+                {
+                    score += 20
+                    scoreLabel = SKLabelNode(text: "\(score)")
+                }
+                else if i?.color == UIColor.blue
+                {
+                    score += 50
+                    scoreLabel = SKLabelNode(text: "\(score)")
+                }
             }
             print(numOfBrick)
             if numOfBrick == 0
             {
                 showAlert(withTitle: "You Won!!!", message: "Congrats, you have finished level one. Click the button below to progress to the next level")
             }
+            
         }
         print("lost ball and my will to live")
         if contact.bodyA.node?.name == "Lose Zone" || contact.bodyB.node?.name == "Lose Zone"
@@ -245,6 +265,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate, Alertable
             numOfBrick += 1
             print("whymbnmb")
         }
+    }
+    
+    func createScoreLabel ()
+    {
+    scoreLabel = SKLabelNode(text: "\(score)")
+        
     }
     
     func constructLoseZone()

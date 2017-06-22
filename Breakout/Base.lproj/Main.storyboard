@@ -1,31 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D30" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="27r-jp-OBr">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="p3V-66-Z6a">
+        <!--Intro View Controller-->
+        <scene sceneID="DvH-0R-9Cf">
             <objects>
-                <viewController id="wZO-1s-udU" sceneMemberID="viewController">
+                <viewController id="27r-jp-OBr" customClass="IntroViewController" customModule="Breakout" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="itW-26-dJZ"/>
-                        <viewControllerLayoutGuide type="bottom" id="a2U-rz-lH9"/>
+                        <viewControllerLayoutGuide type="top" id="4j4-DW-FTw"/>
+                        <viewControllerLayoutGuide type="bottom" id="U9n-eF-6oh"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="21M-ki-2e2">
+                    <view key="view" contentMode="scaleToFill" id="P37-Ef-jQK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BREAKOUT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kqs-sn-TCn">
+                                <rect key="frame" x="44" y="88" width="286" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="Eot-35-ogt"/>
+                                    <constraint firstAttribute="width" constant="286" id="Qha-FF-Bps"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AcademyEngravedLetPlain" family="Academy Engraved LET" pointSize="45"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Msm-R4-yJT">
+                                <rect key="frame" x="78" y="352" width="218" height="74"/>
+                                <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="WdZ-Rs-a1m"/>
+                                    <constraint firstAttribute="width" constant="218" id="za4-Gz-kAU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AcademyEngravedLetPlain" family="Academy Engraved LET" pointSize="41"/>
+                                <state key="normal" title="EASY">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="1Qv-35-f50" kind="show" id="2Vd-E5-MJs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gzg-yq-fe3">
+                                <rect key="frame" x="78" y="471" width="218" height="74"/>
+                                <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="218" id="SEn-mY-Pvt"/>
+                                    <constraint firstAttribute="height" constant="74" id="diJ-1h-xRv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AcademyEngravedLetPlain" family="Academy Engraved LET" pointSize="41"/>
+                                <state key="normal" title="HARD">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="mUS-R1-NyF" kind="show" id="JWS-Rh-xLe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BZZ-vV-enn">
+                                <rect key="frame" x="39" y="233" width="297" height="74"/>
+                                <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="297" id="HsY-QJ-bIp"/>
+                                    <constraint firstAttribute="height" constant="74" id="Tfi-rB-ghq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AcademyEngravedLetPlain" family="Academy Engraved LET" pointSize="41"/>
+                                <state key="normal" title="SUPER EASY">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BV1-FR-VrT" kind="show" id="LC5-my-3aV"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHOOSE YOUR DIFFICULTY LEVEL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lqq-jR-blJ">
+                                <rect key="frame" x="22" y="154" width="331" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="6Bl-Ra-Iaa"/>
+                                    <constraint firstAttribute="width" constant="331" id="lS5-sv-4fZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Kqs-sn-TCn" firstAttribute="centerX" secondItem="P37-Ef-jQK" secondAttribute="centerX" id="1lF-6n-e87"/>
+                            <constraint firstItem="BZZ-vV-enn" firstAttribute="top" secondItem="Lqq-jR-blJ" secondAttribute="bottom" constant="25" id="Dev-rB-hT2"/>
+                            <constraint firstItem="BZZ-vV-enn" firstAttribute="centerX" secondItem="P37-Ef-jQK" secondAttribute="centerX" id="HDL-W1-2Mk"/>
+                            <constraint firstItem="Msm-R4-yJT" firstAttribute="top" secondItem="BZZ-vV-enn" secondAttribute="bottom" constant="45" id="LF2-hH-gST"/>
+                            <constraint firstItem="Lqq-jR-blJ" firstAttribute="top" secondItem="Kqs-sn-TCn" secondAttribute="bottom" constant="8" id="PbM-KR-zDQ"/>
+                            <constraint firstItem="Msm-R4-yJT" firstAttribute="centerX" secondItem="P37-Ef-jQK" secondAttribute="centerX" id="QXS-Ip-Tgv"/>
+                            <constraint firstItem="gzg-yq-fe3" firstAttribute="centerX" secondItem="P37-Ef-jQK" secondAttribute="centerX" id="bBt-1m-4Xu"/>
+                            <constraint firstItem="Lqq-jR-blJ" firstAttribute="centerX" secondItem="P37-Ef-jQK" secondAttribute="centerX" id="fHM-Nj-LSQ"/>
+                            <constraint firstItem="Kqs-sn-TCn" firstAttribute="top" secondItem="4j4-DW-FTw" secondAttribute="bottom" constant="24" id="imN-bO-Ubw"/>
+                            <constraint firstItem="gzg-yq-fe3" firstAttribute="top" secondItem="Msm-R4-yJT" secondAttribute="bottom" constant="45" id="oc9-VJ-hdg"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="M3g-l7-HPF"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jDe-LJ-d5U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VXX-Zp-mOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-692" y="130"/>
+            <point key="canvasLocation" x="437.60000000000002" y="770.46476761619192"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -43,11 +123,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1223" y="66"/>
         </scene>
-        <!--View Controller-->
+        <!--Easy View Controller-->
         <scene sceneID="bO9-TP-9Y5">
             <objects>
-                <viewController id="1Qv-35-f50" sceneMemberID="viewController">
+                <viewController id="1Qv-35-f50" customClass="EasyViewController" customModule="Breakout" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Mp-aU-6kw"/>
                         <viewControllerLayoutGuide type="bottom" id="i7G-Jc-pfI"/>
@@ -60,7 +141,43 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d9e-pg-TIP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="856" y="127"/>
+            <point key="canvasLocation" x="1298" y="770"/>
+        </scene>
+        <!--Hard View Controller-->
+        <scene sceneID="bsj-A8-5u6">
+            <objects>
+                <viewController id="mUS-R1-NyF" customClass="HardViewController" customModule="Breakout" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Muf-Rw-eeI"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hgs-LC-No6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JvM-LK-aUr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="feZ-hp-QQw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1097" y="1528"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="i41-qU-sYN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="91h-cs-i0g" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="l0q-qd-b1J">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="27r-jp-OBr" kind="relationship" relationship="rootViewController" id="xZ5-p8-r0z"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dC0-6x-t9X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-394.39999999999998" y="772.26386806596713"/>
         </scene>
     </scenes>
 </document>

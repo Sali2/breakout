@@ -4,7 +4,7 @@
 //
 //  Created by Sakina Ali on 6/21/17.
 //  Copyright © 2017 Sakina Ali. All rights reserved.
-// this is a test
+// this is a test uhggg
 
 import SpriteKit
 import GameplayKit
@@ -17,6 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     var bricksArray:[SKSpriteNode?] = []
     var numOfBrick = 0
     var ballCount = 3
+    var brickMade = 0
     
     override func didMove(to view: SKView)
     {
@@ -28,6 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         concieveBrick()
         concieveBrickTwo()
         concieveBrickThree()
+        print(numOfBrick)
         
     }
     
@@ -57,17 +59,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     
     func didBegin(_ contact: SKPhysicsContact)
     {
+        numOfBrick = 15
         print("contact func")
         for i in bricksArray
         {
             print("contact loop")
-            if contact.bodyA.node!.name == "Brick" && contact.bodyB.node!.name == "Ball" || contact.bodyA.node!.name == "Ball" && contact.bodyB.node!.name == "Brick" || contact.bodyA.node!.name == "i" && contact.bodyB.node!.name == "Ball" || contact.bodyA.node!.name == "Ball" && contact.bodyB.node!.name == "i"
+            if (contact.bodyA.node! == ball) && (contact.bodyB.node! ==  i) || (contact.bodyA.node! == i) && (contact.bodyB.node! == ball)
             {
                 print("Brick Hit")
                 i!.removeFromParent()
-                
                 numOfBrick -= 1
-                break
+                print(numOfBrick)
+                
             }
             if numOfBrick == 0
             {
@@ -78,7 +81,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             }
         }
         
-        if contact.bodyA.node?.name == "Lose Zone" || contact.bodyB.node?.name == "Lose Zone"
+        if contact.bodyA.node == loseZone || contact.bodyB.node == loseZone
         {
             print("Ball lost!")
             ball.physicsBody?.isDynamic = false
@@ -150,16 +153,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         addChild(paddle)
     }
     
-    func concieveBrickThree()
+    func concieveBrick()
     {
         var xPos = frame.minX + 45
-        var yPos = frame.maxY - 30
-
-        for i in 0...14
+        var yPos = frame.maxY - 130
+        
+        for i in 0...4
         {
             print("part 1")
 
-            var i = SKSpriteNode(color: UIColor.cyan, size: CGSize(width: frame.width / 6, height: frame.height / 24.5))
+            
+            var i = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width / 6, height: frame.height / 24.5))
             i.name = "i"
             i.physicsBody = SKPhysicsBody(rectangleOf: i.size)
             i.physicsBody?.isDynamic = false
@@ -178,7 +182,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         var xPos = frame.minX + 45
         var yPos = frame.maxY - 80
         
-        for i in 0...14
+        for i in 5...9
         {
             print("part 1")
             
@@ -196,17 +200,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         }
     }
     
-    func concieveBrick()
+    func concieveBrickThree()
     {
         var xPos = frame.minX + 45
-        var yPos = frame.maxY - 130
+        var yPos = frame.maxY - 30
         
-        for i in 0...14
+        for i in 10...14
         {
             print("part 1")
             
-            var i = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width / 6, height: frame.height / 24.5))
-            i.name = "Brick"
+            var i = SKSpriteNode(color: UIColor.cyan, size: CGSize(width: frame.width / 6, height: frame.height / 24.5))
+          //  bricksArray:[0] = "Brick1"
             i.physicsBody = SKPhysicsBody(rectangleOf: i.size)
             i.physicsBody?.isDynamic = false
             i.position = CGPoint(x: xPos, y: yPos)

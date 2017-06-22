@@ -20,7 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, Alertable
     var scoreLabel : SKLabelNode!
     var titleScore : SKLabelNode!
     var score = 0
-    
+    var alertLabel :  SKLabelNode!
     
     override func didMove(to view: SKView)
     {
@@ -29,6 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, Alertable
         createBackground()
         makeBall()
         generatePaddle()
+        constructLoseZone()
         levelOne()
         
     }
@@ -87,21 +88,53 @@ class GameScene: SKScene, SKPhysicsContactDelegate, Alertable
             print(numOfBrick)
             if numOfBrick == 0
             {
-                showAlert(withTitle: "You Won!!!", message: "Congrats, you have finished level one. Click the button below to progress to the next level")
+                ball.physicsBody?.isDynamic == false
+                alertLabelPop(text: "Congrats, you won!!")
+                let when = DispatchTime.now() + 1
+                DispatchQueue.main.asyncAfter(deadline: when)
+                {
+                    self.alertLabel.zPosition = -2
+                    self.levelTwo()
+                }
+                
+                
             }
             
         }
         print("lost ball and my will to live")
-        if contact.bodyA.node?.name == "Lose Zone" || contact.bodyB.node?.name == "Lose Zone"
+        if (contact.bodyA.node! == ball) && (contact.bodyB.node! == loseZone) || (contact.bodyA.node! == loseZone) && (contact.bodyB.node! == ball)
         {
+            print("loseZone hit")
             if ballCount > 1
             {
+                
                 ballCount -= 1
-                showAlert(withTitle: "OH NO!", message: "You have lost a life!")
+                alertLabelPop(text: "You lost a life")
+                let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when)
+                {
+                   self.alertLabel.zPosition = -2
+                }
+                ball.physicsBody?.isDynamic == false
+                print(ballCount)
+                
             }
-            else
+            else if ballCount == 0
             {
-                showAlert(withTitle: "OH NO!", message: "You have lost. Try again or try a different level!")
+                ball.physicsBody?.isDynamic == false
+                print("total failure")
+                alertLabelPop(text: "You lost, try again")
+                let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when)
+                {
+                    // Your code with delay
+                    self.alertLabel.zPosition = -2
+                }
+                DispatchQueue.main.asyncAfter(deadline: when)
+                {
+                    self.restartGame()
+                }
+                
             }
         }
     }
@@ -115,32 +148,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate, Alertable
     
     func levelTwo()
     {
-        concieveBrick()
-        concieveBrickTwo()
-        concieveBrickThree()
-        
-        func makeBall()
-        {
-            let ballDiameter = frame.width/20
-            ball = SKSpriteNode(color: UIColor.white, size: CGSize(width: ballDiameter, height: ballDiameter))
-            ball.position = CGPoint(x: frame.midX, y: frame.midY)
-            ball.name = "Ball"
-            
-            ball.physicsBody = SKPhysicsBody(circleOfRadius: ballDiameter/2)
-            //applies physics body to ball
-            
-            ball.physicsBody?.isDynamic = false  //ignores all forces and impulses
-            ball.physicsBody?.usesPreciseCollisionDetection = true
-            ball.physicsBody?.allowsRotation = false
-            ball.physicsBody?.friction = 0
-            ball.physicsBody?.affectedByGravity = false
-            ball.physicsBody?.restitution = 1
-            ball.physicsBody?.angularDamping = 0
-            ball.physicsBody?.linearDamping = 0
-            ball.physicsBody?.contactTestBitMask = (ball.physicsBody?.collisionBitMask)!
-            
-            addChild(ball)  
-        }
+        concieveBrickLevelOne()
+        concieveBrickLevelTwo()
+        concieveBrickLevelThree()
     }
     func createBackground()
     {
@@ -189,7 +199,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, Alertable
     func generatePaddle()
     {
         paddle = SKSpriteNode(color: UIColor.white, size: CGSize(width: frame.width / 4, height: frame.height / 50))
-        paddle.position = CGPoint(x: frame.midX, y: frame.minY + 125)
+        paddle.position = CGPoint(x: frame.midX, y: frame.minY + 200)
         paddle.name = "Paddle"
         paddle.physicsBody = SKPhysicsBody(rectangleOf: paddle.size)
         paddle.physicsBody?.isDynamic = false
@@ -275,7 +285,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate, Alertable
     
     func constructLoseZone()
     {
-        loseZone = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width, height: 50))
+        loseZone = SKSpriteNode(color: UIColor.clear, size: CGSize(width: frame.width, height: 50))
         loseZone.position = CGPoint(x: frame.midX, y: frame.minY + 50)
         loseZone.name = "Lose Zone"
         loseZone.physicsBody = SKPhysicsBody(rectangleOf: loseZone.size)
@@ -283,5 +293,97 @@ class GameScene: SKScene, SKPhysicsContactDelegate, Alertable
         
         addChild(loseZone)
     }
+    
+    func alertLabelPop(text: String)
+    {
+        alertLabel = SKLabelNode(fontNamed: "Hiragino Mincho ProN W3")
+        alertLabel.position = CGPoint(x: frame.midX, y: frame.midY)
+        alertLabel.zPosition = 100
+        alertLabel.fontSize = 50.0
+        alertLabel.fontColor = UIColor.white
+        alertLabel.text = "\(text)"
+        addChild(alertLabel)
+    }
+    
+    func concieveBrickLevelOne()
+    {
+        var xPos = frame.minX + 45
+        var yPos = frame.maxY - 200
+        
+        for i in 0...4
+        {
+            print("part 1")
+            
+            
+            var i = SKSpriteNode(color: UIColor.red, size: CGSize(width: frame.width / 6, height: frame.height / 24.5))
+            i.name = "i"
+            i.physicsBody = SKPhysicsBody(rectangleOf: i.size)
+            i.physicsBody?.isDynamic = false
+            i.position = CGPoint(x: xPos, y: yPos)
+            xPos += frame.maxX - 200 + ((frame.width / 6) + 5)
+            bricksArray.append(i)
+            addChild(i)
+            print("pls")
+            numOfBrick += 1
+            print("whymbnmb")
+        }
+    }
+    
+    func concieveBrickLevelTwo()
+    {
+        var xPos = frame.minX + 45
+        var yPos = frame.maxY - 150
+        
+        for i in 5...9
+        {
+            print("part 1")
+            
+            var i = SKSpriteNode(color: UIColor.green, size: CGSize(width: frame.width / 6, height: frame.height / 24.5))
+            i.name = "i"
+            i.physicsBody = SKPhysicsBody(rectangleOf: i.size)
+            i.physicsBody?.isDynamic = false
+            i.position = CGPoint(x: xPos, y: yPos)
+            xPos += frame.maxX - 200 + ((frame.width / 6) + 5)
+            bricksArray.append(i)
+            addChild(i)
+            print("pls")
+            numOfBrick += 1
+            print("whymbnmb")
+        }
+    }
+    
+    func concieveBrickLevelThree()
+    {
+        var xPos = frame.minX + 45
+        var yPos = frame.maxY - 50
+        
+        for i in 10...14
+        {
+            print("part 1")
+            
+            var i = SKSpriteNode(color: UIColor.cyan, size: CGSize(width: frame.width / 6, height: frame.height / 24.5))
+            //  bricksArray:[0] = "Brick1"
+            i.physicsBody = SKPhysicsBody(rectangleOf: i.size)
+            i.physicsBody?.isDynamic = false
+            i.position = CGPoint(x: xPos, y: yPos)
+            xPos += frame.maxX - 200 + ((frame.width / 6) + 5)
+            bricksArray.append(i)
+            addChild(i)
+            print("pls")
+            numOfBrick += 1
+            print("whymbnmb")
+        }
+    }
+func restartGame()
+{
+    physicsWorld.contactDelegate = self
+    createBackground()
+    generatePaddle()
+    makeBall()
+    constructLoseZone()
+    concieveBrick()
+    concieveBrickTwo()
+    concieveBrickThree()
 }
 
+}

@@ -17,7 +17,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     var bricksArray:[SKSpriteNode?] = []
     var numOfBrick = 0
     var ballCount = 3
-    var brickMade = 0
     
     override func didMove(to view: SKView)
     {
@@ -72,13 +71,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             print(numOfBrick)
             if numOfBrick == 0
             {
-                ball.physicsBody?.isDynamic = false
-                ball.position = CGPoint(x: frame.midX, y: frame.midY)
-                let addAlert = UIAlertController(title: "You Won!!!", message: "Congrats, you finished the level!!!", preferredStyle: .alert)
-                let addButtonTapped = UIAlertAction(title: "Next Level", style: .default)
-                addAlert.addAction(addButtonTapped)
-                addAlert.addAction(UIAlertAction(title: "Play Again", style: .cancel, handler: nil))
-                
+          
             }
         }
         
@@ -91,8 +84,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             if ballCount <= 0
             {
                 print("you lose")
-                let myAlert = UIAlertController(title: "Good Try", message: "Sorry, you lost! Try again!", preferredStyle: UIAlertControllerStyle.alert)
-          //      let resetButton = UIAlertAction(title: "Play Again", style: UIAlertActionStyle.default, handler: {sender in))
+                let myAlert = UIAlertController(title: "You have lost a ball", message: "Please try again", preferredStyle: UIAlertControllerStyle.alert)
+                let dismissButton = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+                myAlert.addAction(dismissButton)
                         print("lord jesus, i dont wanna die")
                 
             }
@@ -145,7 +139,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     
     func generatePaddle()
     {
-        paddle = SKSpriteNode(color: UIColor.white, size: CGSize(width: frame.width / 5, height: frame.height / 25))
+        paddle = SKSpriteNode(color: UIColor.white, size: CGSize(width: frame.width / 4, height: frame.height / 50))
         paddle.position = CGPoint(x: frame.midX, y: frame.minY + 125)
         paddle.name = "Paddle"
         paddle.physicsBody = SKPhysicsBody(rectangleOf: paddle.size)
@@ -226,7 +220,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     
     func constructLoseZone()
     {
-        loseZone = SKSpriteNode(color: UIColor.clear, size: CGSize(width: frame.width, height: 50))
+        loseZone = SKSpriteNode(color: UIColor.blue, size: CGSize(width: frame.width, height: 50))
         loseZone.position = CGPoint(x: frame.midX, y: frame.minY + 25)
         loseZone.name = "Lose Zone"
         loseZone.physicsBody = SKPhysicsBody(rectangleOf: loseZone.size)

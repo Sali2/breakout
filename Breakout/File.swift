@@ -32,6 +32,5 @@ extension Alertable where Self: SKScene {
         alertController.addAction(settingsAction)
         
         view?.window?.rootViewController?.present(alertController, animated: true)
-    }
-
-}
+    } 
+*/
